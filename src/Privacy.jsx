@@ -37,7 +37,7 @@ const App = () => {
         bottom: "126px",
         position: "absolute",
         filter: "contrast(0.4)"
-      }}>Try it now !!</div>
+      }}>Try Hiro now !!</div>
       <img src={arrow} alt='logo' className='w-32 object-contain' style={{
         transform: "rotate(195deg)",
         width: "54px",

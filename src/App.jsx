@@ -23,7 +23,7 @@ const App = () => {
         bottom: "126px",
         position: "absolute",
         
-      }}>Try Hiro Now !!</div>
+      }}>Try Hiro now !!</div>
       <img src={arrow} alt='logo' className='w-32 object-contain' style={{
         transform: "rotate(195deg)",
         width: "54px",
