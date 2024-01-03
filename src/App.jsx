@@ -7,9 +7,6 @@ import { Link } from 'react-router-dom';
 const App = () => {
   return (
     <>
-    <head>
-    <meta name="google-site-verification" content="M5AXSI6T05aBtOL0zN-RlAFcM4OHuGegv_NbjwxKTDg" />
-    </head>
       <main>
         <div className="main">
           <div className="gradient" />
