@@ -11,7 +11,7 @@ import Register from "./Register";
 
 const Root = () => (
   <React.StrictMode>
-  <Provider store={store}>
+  <Provider>
     <Router>
       <Routes>
         <Route path="/privacy" element={<Privacy />} />
