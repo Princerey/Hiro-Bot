@@ -8,7 +8,6 @@ import Privacy from "./Privacy";
 import Login from "./Login"
 import Register from "./Register";
 
-import { store } from "./services/store";
 
 const Root = () => (
   <React.StrictMode>
