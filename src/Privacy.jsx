@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { logo } from './assets';
 import { arrow } from './assets'
+import { Link } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -45,14 +46,14 @@ const App = () => {
         position: "absolute",
         filter: "contrast(0.4)"
       }} />
-      <a href='/' style={{
+      <Link to='/' style={{
        fontFamily:"Yanone Kaffeesatz",
        fontSize:"20px",
         left: "30px",
         bottom: "20px",
         position: "absolute",
         filter: "contrast(0.4)"
-      }}>Back to Home</a>
+      }}>Back to Home</Link>
     </>
   )
 }
