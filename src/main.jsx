@@ -1,18 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Provider } from "react-redux";
-
 import App from "./App";
 import Privacy from "./Privacy";
 import Login from "./Login"
 import Register from "./Register";
 
-import { store } from "./services/store";
-
 const Root = () => (
   <React.StrictMode>
-  <Provider store={store}>
     <Router>
       <Routes>
         <Route path="/privacy" element={<Privacy />} />
@@ -21,7 +16,6 @@ const Root = () => (
         <Route path="/" element={<App />} />
       </Routes>
     </Router>
-  </Provider>
 </React.StrictMode>
 );
 
