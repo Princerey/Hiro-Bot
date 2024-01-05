@@ -80,21 +80,25 @@
 }
 
 .black_btn {
-  @apply border rounded-full border-[#3d3d3d] bg-[#3d3d3d] py-1.5 pt-1.5 px-5 text-sm text-white transition-all hover:bg-white hover:text-black;
+  @apply border rounded-full border-[#3d3d3d] bg-[#3d3d3d] py-1.5 pt-1.5 px-5 text-xs sm:text-sm text-white transition-all hover:bg-white hover:text-black;
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
+  @apply mt-5 text-[2.5rem] font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
 }
-
+.head_text1 {
+  @apply mt-1 sm:mt-5 text-[2.5rem] font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
+}
 .orange_gradient {
-  @apply bg-gradient-to-r from-[#3923a2] via-[#8723a2] to-[#3923a2] bg-clip-text text-transparent text-5xl leading-[2];
+  @apply bg-gradient-to-r from-[#3923a2] via-[#8723a2] to-[#3923a2] bg-clip-text text-transparent text-4xl sm:text-[48px] leading-[2];
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600 sm:text-xl text-center max-w-3xl;
+  @apply mt-5 text-[16px] text-gray-600 sm:text-xl text-center max-w-3xl;
 }
-
+.desc1 {
+  @apply mt-1 sm:mt-5 text-[13px] text-gray-600 sm:text-xl text-justify max-w-3xl;
+}
 .url_input {
   @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 pl-10 pr-12 text-sm shadow-lg font-satoshi font-medium focus:border-black focus:outline-none focus:ring-0;
 }
@@ -116,6 +120,14 @@
 }
 
 /* CSS */
+
+@media  screen and (max-width:600px) {
+  .button-86{
+    font-size: 14px !important;
+    position: relative !important;
+    bottom: 20px !important;
+  }
+}
 .button-86 {
   all: unset;
   height: 35px;

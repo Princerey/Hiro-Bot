@@ -15,18 +15,15 @@ const App = () => {
           <Hero />
         </div>
       </main>
-      <div style={{
+      <div className='right-[85px] bottom-[110px] sm:right-[98px] sm:bottom-[126px]' style={{
        fontFamily:"Yanone Kaffeesatz",
        color:"#3d3d3d",
        fontSize:"24px",
-        right: "98px",
-        bottom: "126px",
         position: "absolute",
         
       }}>Try Hiro now !!</div>
-      <img src={arrow} alt='logo' className='w-32 object-contain' style={{
+      <img src={arrow} alt='logo' className='w-[44px] sm:w-[54px] object-contain' style={{
         transform: "rotate(195deg)",
-        width: "54px",
         right: "64px",
         bottom: "79px",
         position: "absolute",
