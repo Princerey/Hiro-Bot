@@ -15,7 +15,7 @@ const App = () => {
           <Hero />
         </div>
       </main>
-      <div className='right-[85px] bottom-[110px] sm:right-[98px] sm:bottom-[126px]' style={{
+      <div className=' bottom-[115px] md:right-24 sm:right-16 right-10 sm:bottom-[126px]' style={{
        fontFamily:"Yanone Kaffeesatz",
        color:"#3d3d3d",
        fontSize:"24px",
@@ -29,10 +29,9 @@ const App = () => {
         position: "absolute",
         filter: "contrast(0.4)"
       }} />
-      <Link to='/privacy' style={{
+      <Link to='/privacy' className='md:left-24 sm:left-16 left-6' style={{
        fontFamily:"Yanone Kaffeesatz",
        fontSize:"20px",
-        left: "30px",
         bottom: "20px",
         position: "absolute",
         filter: "contrast(0.4)"

@@ -76,7 +76,7 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative z-10 flex justify-center items-center flex-col mx-auto md:px-24 sm:px-16 px-6;
 }
 
 .black_btn {
@@ -84,14 +84,14 @@
 }
 
 .head_text {
-  @apply mt-5 text-[2.5rem] font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
+  @apply mt-5 text-[40px] font-extrabold leading-[1.15] text-black sm:text-[54px] text-center;
 }
 .head_text1 {
   @apply mt-1 sm:mt-5 text-[2.5rem] font-extrabold leading-[1.15] text-black sm:text-6xl text-center;
 }
 .orange_gradient {
-  @apply bg-gradient-to-r from-[#3923a2] via-[#8723a2] to-[#3923a2] bg-clip-text text-transparent text-4xl sm:text-[48px] leading-[2];
-}
+  @apply bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent text-3xl sm:text-[40px] leading-[2];
+} 
 
 .desc {
   @apply mt-5 text-[16px] text-gray-600 sm:text-xl text-center max-w-3xl;

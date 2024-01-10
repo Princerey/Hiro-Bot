@@ -5,6 +5,7 @@ import { arrow } from './assets'
 import { Link } from 'react-router-dom';
 
 const App = () => {
+  const isUserLoggedIn = localStorage.getItem('user_hiro');
   return (
     <>
       <main>
@@ -14,10 +15,22 @@ const App = () => {
         <div className="app">
         <header className='w-full flex justify-center items-center flex-col'>
         <nav className='flex justify-between items-center w-full mb-5 sm:mb-10 pt-6 flex-row'>
-        <img src={logo} alt='logo' className='w-[6.5rem] sm:w-32 object-contain' />
+        <img src={logo} alt='logo' className='w-[6.5rem] sm:w-28 object-contain' />
         <div className='flex-row flex gap-4 '>
-        <button type='button' className='black_btn'>Register</button>
-        <button type='button' className='black_btn'>Login</button>
+        {isUserLoggedIn ? (
+              <button className='black_btn' onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <>
+                <a href='/register' className='black_btn'>
+                  Register
+                </a>
+                <a href='/login' className='black_btn'>
+                  Login
+                </a>
+              </>
+            )}
         </div>
       </nav>
       <div className='mt-0 flex flex-col justify-center items-center '>
@@ -31,10 +44,9 @@ const App = () => {
         </div>
       </main>
     
-      <Link to='/' style={{
+      <Link to='/'className='md:left-24 sm:left-16 left-6' style={{
        fontFamily:"Yanone Kaffeesatz",
        fontSize:"20px",
-        left: "30px",
         bottom: "20px",
         position: "absolute",
         filter: "contrast(0.4)"

@@ -1,55 +1,293 @@
 import React from 'react';
 import './App.css';
 import { logo } from './assets';
-import { arrow } from './assets'
+import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import { Button, Stack, Modal, Typography } from '@mui/material';
+import { useEffect } from 'react';
+import styles from "./styles/Login.module.css"
+import { useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const App = () => {
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClick2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen2(false);
+  };
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+  });
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarType, setSnackbarType] = useState('');
+  const history = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirm_password) {
+      setSnackbarMessage("Passwords don't match");
+      setSnackbarType('error');
+      handleClick2();
+      return;
+    }
+    if (formData.password.length < 8) {
+      setSnackbarMessage('Password must be at least 8 characters long');
+      setSnackbarType('error');
+      handleClick2();
+      return;
+    }
+
+    try {
+      // const formData = new FormData();
+      // formData.append("prompt", message);
+      const response = await fetch('https://serenesage-ajgfh2cne6b2dsb0.z03.azurefd.net/user/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setSnackbarMessage("Email already exist try with a different email");
+        setSnackbarType('error');
+        handleClick2();
+        throw new Error(errorData.detail || 'Failed to create user');
+      }
+      setSnackbarMessage('User Registered Successfully')
+      setSnackbarType('success');
+      handleClick2();
+      setTimeout(() => {
+        history('/login');
+      }, 1500)
+
+    } catch (error) {
+      setSnackbarMessage("Error from the server please try again after sometime");
+      setSnackbarType('error');
+      handleClick2();
+      console.error('Error creating user:', error.message);
+    }
+  };
+  useEffect(() => {
+    // Check if access token is present in localStorage
+    const accessToken = localStorage.getItem('user_hiro');
+
+    if (accessToken) {
+      // Redirect to the homepage with the access token
+      history('/');
+    }
+  }, [history]);
+
   return (
     <>
+      <Snackbar open={open2} autoHideDuration={4000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity={snackbarType} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       <main>
         <div className="main">
           <div className="gradient" />
         </div>
         <div className="app">
-        <header className='w-full flex justify-center items-center flex-col'>
-      <nav className='flex justify-between items-center w-full mb-10 pt-6 flex-row'>
-        <img src={logo} alt='logo' className='w-32 object-contain' />
-        <div className='flex-row flex gap-4 '>
-        <button type='button' className='black_btn'>Register</button>
-        <button type='button' className='black_btn'>Login</button>
-        </div>
-      </nav>
-      <div className='mt-0 flex flex-col justify-center items-center '>
-      <h1 className='head_text' style={{fontFamily:"Yanone Kaffeesatz",fontWeight:"400",color:"#3d3d3d"}}>
-      Privacy Policy<br className='max-md:hidden' />
-      </h1>
-      <h2 className='desc relative' style={{fontFamily:"poppins"}}>
-  We prioritize your privacy, and this Privacy Policy outlines how we handle your information. When you use our mental health chatbot, we may collect personal details like your name, email, and location with your explicit consent. Your privacy is our top priority, and we want you to feel secure using our mental health chatbot. Your conversations with the chatbot are not stored or shared, ensuring full privacy. Our chatbot is designed to respect your anonymity, and no personal details are retained. Rest assured, we do not sell, trade, or share your personal data with third parties for marketing purposes. Industry-standard security measures are in place to safeguard your information, and we may use cookies to enhance your browsing experience. This policy may be updated periodically, so please check the effective date for the latest version. If you have any questions, contact us at rohkumar0126@gmail.com. By using our chatbot, you consent to this Privacy Policy. Thank you for trusting Hiro for your mental health support.</h2>
-      </div>
-    </header>
+          <header className='w-full flex justify-center items-center flex-col'>
+            <nav className='flex justify-between items-center w-full mb-10 pt-6 flex-row'>
+              <img src={logo} alt='logo' className='w-28 object-contain' />
+              <div className='flex-row flex gap-4 '>
+                <a href='/login' className='black_btn'>Login</a>
+              </div>
+            </nav>
+            <div className='relative bottom-4 sm:bottom-0 mt-0 flex flex-col justify-center items-center '>
+              <h1 className='head_text' style={{ fontFamily: "Yanone Kaffeesatz", fontWeight: "400", color: "#3d3d3d", marginTop: "5px" }}>
+                Register<br className='max-md:hidden' />
+              </h1>
+              <form onSubmit={handleSubmit} className='w-[320px] sm:w-[600px]' style={{
+                margin: "25px", marginTop: "10px", padding: "20px",
+
+                border: "1px solid rgba(255, 255, 255, 0.125)", borderRadius: "8px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center"
+              }}>
+                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", width: "100%", marginBottom: "10px" }}>
+                  <TextField
+                    label="First Name"
+                    name="first_name"
+                    value={formData.first_name}
+                    onChange={handleChange}
+                    required
+                    margin="normal"
+                    sx={{
+                      flex: 1, marginRight: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1e1e1e', // Set your custom border color
+                      },
+                    }}
+                    InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                    InputProps={{ style: { color: "#3d3d3d" } }}
+                  />
+                  <TextField
+                    label="Last Name"
+                    name="last_name"
+                    value={formData.last_name}
+                    required
+                    onChange={handleChange}
+                    margin="normal"
+                    sx={{
+                      flex: 1, '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1e1e1e', // Set your custom border color
+                      }
+                    }}
+                    InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                    InputProps={{ style: { color: "#3d3d3d" } }}
+                  />
+                </div>
+                <TextField
+                  label="Email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  margin="normal"
+                  sx={{
+                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1e1e1e', // Set your custom border color
+                    }
+                  }}
+                  InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                  InputProps={{ style: { color: "#3d3d3d" } }}
+                />
+                <div className='!flex sm:!hidden' style={{ flexDirection: "row", justifyContent: "space-between", width: "100%", marginBottom: "10px" }}>
+                  <TextField
+                    label="Password"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    margin="normal"
+                    sx={{
+                      flex: 1, marginRight: "10px",
+                      marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1e1e1e', // Set your custom border color
+                      }
+                    }}
+                    InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                    InputProps={{ style: { color: "#3d3d3d" } }}
+                  />
+                  <TextField
+                    label="Confirm Password"
+                    name="confirm_password"
+                    type="password"
+                    value={formData.confirm_password}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                    margin="normal"
+                    sx={{
+                      flex: 1,
+                      marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: '#1e1e1e', // Set your custom border color
+                      }
+                    }}
+                    InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                    InputProps={{ style: { color: "#3d3d3d" } }}
+                  />
+                </div>
+
+                <TextField
+                  label="Password"
+                  name="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  margin="normal"
+                  className='!hidden sm:!flex'
+                  sx={{
+                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1e1e1e', // Set your custom border color
+                    }
+                  }}
+                  InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                  InputProps={{ style: { color: "#3d3d3d" } }}
+                />
+                <TextField
+                  label="Confirm Password"
+                  name="confirm_password"
+                  type="password"
+                  value={formData.confirm_password}
+                  className='!hidden sm:!flex'
+                  onChange={handleChange}
+                  fullWidth
+                  required
+                  margin="normal"
+                  sx={{
+                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
+                      borderColor: '#1e1e1e', // Set your custom border color
+                    }
+                  }}
+                  InputLabelProps={{ style: { color: "#3d3d3d" } }}
+                  InputProps={{ style: { color: "#3d3d3d" } }}
+                />
+                <Button variant="contained" fullWidth className={styles.button30} type='submit' >
+                  Create User
+                </Button>
+
+              </form>
+              <GoogleLogin
+                size='large'
+                theme='outline'
+                text='signup_with'
+                shape='pill'
+                onSuccess={credentialResponse => {
+                  
+                  localStorage.setItem('user_hiro', credentialResponse.clientId);
+                  setSnackbarMessage('Successfully logged in! Bot at your service.');
+                  setSnackbarType('success')
+                  handleClick2();
+                  setTimeout(() => {
+                    history('/');
+                    window.location.reload
+                    }, 1500);
+                }}
+                onError={() => {
+                  console.log('Login Failed');
+                }}
+                useOneTap
+              />
+            </div>
+          </header>
         </div>
       </main>
-      <div style={{
-       fontFamily:"Yanone Kaffeesatz",
-       fontSize:"24px",
-        right: "98px",
-        bottom: "126px",
-        position: "absolute",
-        filter: "contrast(0.4)"
-      }}>Try it now !!</div>
-      <img src={arrow} alt='logo' className='w-32 object-contain' style={{
-        transform: "rotate(195deg)",
-        width: "54px",
-        right: "64px",
-        bottom: "79px",
-        position: "absolute",
-        filter: "contrast(0.4)"
-      }} />
-      <a href='/' style={{
-       fontFamily:"Yanone Kaffeesatz",
-       fontSize:"20px",
-        left: "30px",
+      <a href='/' className='md:left-24 sm:left-16 left-6' style={{
+        fontFamily: "Yanone Kaffeesatz",
+        fontSize: "20px",
         bottom: "20px",
+        zIndex: "100",
         position: "absolute",
         filter: "contrast(0.4)"
       }}>Back to Home</a>
