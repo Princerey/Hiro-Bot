@@ -65,7 +65,7 @@ const Login = () => {
       }
       const { access_token } = await response.json();
       localStorage.setItem('user_hiro', access_token);
-      setSnackbarMessage('Successfully logged in! Bot at your service. ✨');
+      setSnackbarMessage('Successfully logged in! Bot at your service ✨');
       setSnackbarType('success')
       handleClick2();
       setTimeout(() => {
@@ -224,7 +224,7 @@ const Login = () => {
                 shape='pill'
                 onSuccess={credentialResponse => {
                   localStorage.setItem('user_hiro', credentialResponse.clientId);
-                  setSnackbarMessage('Successfully logged in! Bot at your service.');
+                  setSnackbarMessage('Successfully logged in! Bot at your service ✨');
                   setSnackbarType('success')
                   handleClick2();
                   setTimeout(() => {
