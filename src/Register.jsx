@@ -101,6 +101,24 @@ const App = () => {
     }
   }, [history]);
 
+  const textFieldStyle = {
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#1e1e1e', // Set your custom border color
+    }
+    , fontFamily: "poppins", '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#7421bf',
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: '#7421bf',
+    },
+    '&:hover': {
+      color: '#7421bf',
+    },
+    '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#7421bf',
+    },
+  };
+
   return (
     <>
       <Snackbar open={open2} autoHideDuration={4000} onClose={handleClose2}>
@@ -137,11 +155,8 @@ const App = () => {
                     onChange={handleChange}
                     required
                     margin="normal"
-                    sx={{
-                      flex: 1, marginRight: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1e1e1e', // Set your custom border color
-                      },
-                    }}
+                    sx={{ ...textFieldStyle, flex: 1, marginRight: "10px" }}
+
                     InputLabelProps={{ style: { color: "#3d3d3d" } }}
                     InputProps={{ style: { color: "#3d3d3d" } }}
                   />
@@ -152,10 +167,9 @@ const App = () => {
                     required
                     onChange={handleChange}
                     margin="normal"
-                    sx={{
-                      flex: 1, '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1e1e1e', // Set your custom border color
-                      }
+                    sx={{...textFieldStyle,
+                      flex: 1,  // Set your custom border color
+                      
                     }}
                     InputLabelProps={{ style: { color: "#3d3d3d" } }}
                     InputProps={{ style: { color: "#3d3d3d" } }}
@@ -171,9 +185,7 @@ const App = () => {
                   required
                   margin="normal"
                   sx={{
-                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#1e1e1e', // Set your custom border color
-                    }
+                    marginBottom: "10px", ...textFieldStyle
                   }}
                   InputLabelProps={{ style: { color: "#3d3d3d" } }}
                   InputProps={{ style: { color: "#3d3d3d" } }}
@@ -190,9 +202,8 @@ const App = () => {
                     margin="normal"
                     sx={{
                       flex: 1, marginRight: "10px",
-                      marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1e1e1e', // Set your custom border color
-                      }
+                      marginBottom: "10px", ...textFieldStyle // Set your custom border color
+                      
                     }}
                     InputLabelProps={{ style: { color: "#3d3d3d" } }}
                     InputProps={{ style: { color: "#3d3d3d" } }}
@@ -208,9 +219,7 @@ const App = () => {
                     margin="normal"
                     sx={{
                       flex: 1,
-                      marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: '#1e1e1e', // Set your custom border color
-                      }
+                      marginBottom: "10px",...textFieldStyle
                     }}
                     InputLabelProps={{ style: { color: "#3d3d3d" } }}
                     InputProps={{ style: { color: "#3d3d3d" } }}
@@ -228,9 +237,7 @@ const App = () => {
                   margin="normal"
                   className='!hidden sm:!flex'
                   sx={{
-                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#1e1e1e', // Set your custom border color
-                    }
+                    marginBottom: "10px",...textFieldStyle
                   }}
                   InputLabelProps={{ style: { color: "#3d3d3d" } }}
                   InputProps={{ style: { color: "#3d3d3d" } }}
@@ -246,9 +253,7 @@ const App = () => {
                   required
                   margin="normal"
                   sx={{
-                    marginBottom: "10px", '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#1e1e1e', // Set your custom border color
-                    }
+                    marginBottom: "10px", ...textFieldStyle
                   }}
                   InputLabelProps={{ style: { color: "#3d3d3d" } }}
                   InputProps={{ style: { color: "#3d3d3d" } }}
@@ -271,7 +276,7 @@ const App = () => {
                   handleClick2();
                   setTimeout(() => {
                     history('/');
-                    window.location.reload
+                    window.location.reload();
                     }, 1500);
                 }}
                 onError={() => {

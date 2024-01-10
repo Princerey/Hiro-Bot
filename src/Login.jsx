@@ -54,7 +54,7 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email:emaillogin , password }),
+        body: JSON.stringify({ email: emaillogin, password }),
       });
 
       if (!response.ok) {
@@ -69,10 +69,10 @@ const Login = () => {
       setSnackbarType('success')
       handleClick2();
       setTimeout(() => {
-      history('/');
-      window.location.reload
+        history('/');
+        window.location.reload();
       }, 1500);
-      
+
       console.log('Login successful');
     } catch (error) {
       console.error('Error during login:', error.message);
@@ -106,7 +106,7 @@ const Login = () => {
         // If email is not registered, show an error message or redirect
         setSnackbarMessage("Email isn't registered with us proceed to register.");
         setSnackbarType('warning')
-        handleClick2();   
+        handleClick2();
       }
     } catch (error) {
       setSnackbarMessage("Error during password reset.");
@@ -116,14 +116,31 @@ const Login = () => {
       // Handle password reset error, e.g., display an error message to the user
     }
   };
+  const textFieldStyle = {
+    '& .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#1e1e1e', // Set your custom border color
+    }
+    , fontFamily: "poppins", '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#7421bf',
+    },
+    '& .MuiInputLabel-root.Mui-focused': {
+      color: '#7421bf',
+    },
+    '&:hover': {
+      color: '#7421bf',
+    },
+    '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
+      borderColor: '#7421bf',
+    },
+  };
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
   return (
     <>
-    <Snackbar open={open2} autoHideDuration={4000} onClose={handleClose2}>
+      <Snackbar open={open2} autoHideDuration={4000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity={snackbarType} sx={{ width: '100%' }}>
-        {snackbarMessage}
+          {snackbarMessage}
         </Alert>
       </Snackbar>
       <main>
@@ -146,7 +163,7 @@ const Login = () => {
                 Login<br className='max-md:hidden' />
               </h1>
               <form onSubmit={handleLogin} className='w-[300px] sm:w-[500px]' style={{
-               margin: "25px", padding: "20px",
+                margin: "25px", padding: "20px",
 
                 border: "1px solid rgba(255, 255, 255, 0.125)", borderRadius: "8px", boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center"
               }}>
@@ -158,11 +175,10 @@ const Login = () => {
                   fullWidth
                   required
                   autoFocus
-                  sx={{
-                    marginBottom: "20px", '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#1e1e1e', // Set your custom border color
-                    }
-                  }}
+                  sx={
+                    textFieldStyle    
+                  }
+                  className='mt-[20px]'
                   InputLabelProps={{ style: { color: "#3d3d3d", fontFamily: "poppins" } }}
                   InputProps={{ style: { color: "#3d3d3d", fontFamily: "poppins" } }}
                   value={emaillogin}
@@ -174,19 +190,16 @@ const Login = () => {
                   margin="normal"
                   fullWidth
                   required
-                  sx={{
-                    '& .MuiOutlinedInput-notchedOutline': {
-                      borderColor: '#1e1e1e', // Set your custom border color
-                    }
-                    , fontFamily: "poppins"
-                  }}
+                  sx={
+                    textFieldStyle    
+                  }
                   InputLabelProps={{ style: { color: "#3d3d3d", fontFamily: "poppins" } }}
                   InputProps={{ style: { color: "#3d3d3d", fontFamily: "poppins" } }}
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                
+
                 <Button
                   variant="contained"
                   className={styles.button30}
@@ -199,11 +212,11 @@ const Login = () => {
                 <Typography
                   onClick={openModal}
                   fullWidth
-                  sx={{ marginTop: 3, color: '#3d3d3d',cursor:"pointer" }}
+                  sx={{ marginTop: 3, color: '#3d3d3d', cursor: "pointer" }}
                 >
                   Forgot Password ?
                 </Typography>
-                
+
               </form>
               <GoogleLogin
                 size='large'
@@ -216,8 +229,8 @@ const Login = () => {
                   handleClick2();
                   setTimeout(() => {
                     history('/');
-                    window.location.reload
-                    }, 1500);
+                    window.location.reload();
+                  }, 1500);
                 }}
                 onError={() => {
                   console.log('Login Failed');
@@ -226,10 +239,10 @@ const Login = () => {
               />
               <Modal open={isModalOpen} onClose={closeModal}>
                 <div style={{
-                  outline:"none",
+                  outline: "none",
                   position: 'absolute',
                   top: '50%',
-                  
+
                   left: '50%',
                   transform: 'translate(-50%, -50%)',
                   background: '#fefefe',
@@ -239,7 +252,7 @@ const Login = () => {
                   maxWidth: '400px',
                   width: '100%',
                 }}>
-                  <Typography variant="h6" sx={{ fontSize: "17px",fontFamily:"poppins",fontWeight:"400" }} gutterBottom>
+                  <Typography variant="h6" sx={{ fontSize: "17px", fontFamily: "poppins", fontWeight: "400" }} gutterBottom>
                     Enter your registered email
                   </Typography>
                   <TextField
@@ -249,7 +262,7 @@ const Login = () => {
                     fullWidth
                     required
                     sx={{
-                    '& .MuiOutlinedInput-notchedOutline': {
+                      '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: '#1e1e1e', // Set your custom border color
                       }
                     }}
@@ -277,7 +290,7 @@ const Login = () => {
       <a href='/' className='md:left-24 sm:left-16 left-6' style={{
         fontFamily: "Yanone Kaffeesatz",
         fontSize: "20px",
-       
+
         bottom: "20px",
         position: "absolute",
         filter: "contrast(0.4)"
