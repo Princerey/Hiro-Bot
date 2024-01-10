@@ -65,7 +65,7 @@ const Login = () => {
       }
       const { access_token } = await response.json();
       localStorage.setItem('user_hiro', access_token);
-      setSnackbarMessage('Successfully logged in! Bot at your service.');
+      setSnackbarMessage('Successfully logged in! Bot at your service. ✨');
       setSnackbarType('success')
       handleClick2();
       setTimeout(() => {
@@ -97,7 +97,7 @@ const Login = () => {
       if (response.status == 200) {
         // If email is registered, show success message or redirect
 
-        setSnackbarMessage('Password reset link sent successfully');
+        setSnackbarMessage('Password reset link sent successfully.');
         setSnackbarType('success')
         handleClick2();
 

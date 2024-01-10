@@ -47,13 +47,13 @@ const App = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirm_password) {
-      setSnackbarMessage("Passwords don't match");
+      setSnackbarMessage("Oops! 🤦‍♂️ Passwords don't match. Please double-check and try again.");
       setSnackbarType('error');
       handleClick2();
       return;
     }
     if (formData.password.length < 8) {
-      setSnackbarMessage('Password must be at least 8 characters long');
+      setSnackbarMessage('Password must be at least 8 characters long.');
       setSnackbarType('error');
       handleClick2();
       return;
@@ -72,12 +72,12 @@ const App = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        setSnackbarMessage("Email already exist try with a different email");
+        setSnackbarMessage("Oops! 🙈 Email already in use. Try a different one!");
         setSnackbarType('error');
         handleClick2();
         throw new Error(errorData.detail || 'Failed to create user');
       }
-      setSnackbarMessage('User Registered Successfully')
+      setSnackbarMessage("Hooray! 🎉 You're officially a part of Hiro's happy community!")
       setSnackbarType('success');
       handleClick2();
       setTimeout(() => {
@@ -85,7 +85,7 @@ const App = () => {
       }, 1500)
 
     } catch (error) {
-      setSnackbarMessage("Error from the server please try again after sometime");
+      setSnackbarMessage("Oops! 😅 Something went wrong on our end. Please try again later.");
       setSnackbarType('error');
       handleClick2();
       console.error('Error creating user:', error.message);

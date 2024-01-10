@@ -44,7 +44,7 @@ const ResetPasswordPage = (token) => {
             return;
         }
         if (newPassword.length < 8) {
-            setSnackbarMessage('Password must be at least 8 characters long');
+            setSnackbarMessage("Oops! 🤦‍♂️ Passwords don't match. Please double-check and try again.");
             setSnackbarType('error');
             handleClick2();
             return;
@@ -83,7 +83,7 @@ const ResetPasswordPage = (token) => {
             }
         } catch (error) {
             console.log(error);
-            setSnackbarMessage('Error during password reset');
+            setSnackbarMessage('Oops! 😅 Something went wrong on our end. Please try again later.');
             setSnackbarType('error');
             handleClick2();
             // Handle password reset error, e.g., display an error message to the user
